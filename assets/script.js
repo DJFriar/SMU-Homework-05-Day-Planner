@@ -1,5 +1,7 @@
 $(document).ready(function() {
     var now = moment().format("dddd, MMMM Do YYYY");
+    console.log(now);
+    var currentHour24h = 0;
 
     // Set date in header area
     $("#currentDay").text(now);
@@ -29,17 +31,16 @@ $(document).ready(function() {
         var timeCol = $("<div>");
         timeCol.addClass("col-md-2 hour");
 
-        var currentHour = 0;
         var amPM = "";
         if (hour > 12) {
-            currentHour = hour - 12;
+            displayHour = hour - 12;
             amPM = "pm";
         } else {
-            currentHour = hour;
+            displayHour = hour;
             amPM = "am";
         }
 
-        timeCol.text(`${ currentHour }${ amPM }`);
+        timeCol.text(`${ displayHour }${ amPM }`);
         newRowDiv.append(timeCol);
 
         // Text area
@@ -51,7 +52,7 @@ $(document).ready(function() {
         inputArea.val(eventArray[rowIndex]);
 
         let descriptionCol = $("<div>");
-        descriptionCol.addClass("col-md-9 description");
+        descriptionCol.addClass("col-md-9");
 
         newRowDiv.append(descriptionCol);
         descriptionCol.append(inputArea);
@@ -69,9 +70,19 @@ $(document).ready(function() {
         saveButtonDiv.append(saveButton);
 
         // set row color based on time
-        // updateRowColor(newRowDiv, hour);
+        updateRowColor(newRowDiv, hour);
 
         plannerDiv.append(newRowDiv);
     }
+
+    function updateRowColor(rowHour,hour) {
+        if (hour < currentHour24h) {
+            rowHour.addClass("past");
+        } else if (hour > currentHour24h) {
+            rowHour.addClass("future");
+        } else {
+            rowHour.addClass("present");
+        }
+    };
 
 });
