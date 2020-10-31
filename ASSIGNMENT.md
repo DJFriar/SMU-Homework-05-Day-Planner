@@ -24,7 +24,7 @@ This homework is graded based on the following criteria:
 
 ### Deployment: 32%
 
-- [ ] Application deployed at live URL.
+- [X] Application deployed at live URL.
 - [X] Application loads with no errors.
 - [X] Application GitHub URL submitted.
 - [X] GitHub repository that contains application code.
