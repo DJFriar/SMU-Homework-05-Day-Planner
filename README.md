@@ -4,7 +4,7 @@ Create a simple calendar application that allows a user to save events for each 
 
 ## Description
 
-Our fifth homework assignment was to create a day planner. You can skip straight to the final product by clicking [here](https://djfriar.github.io/SMU-Homework-04-Code-Quiz/).
+Our fifth homework assignment was to create a day planner. You can skip straight to the final product by clicking [here](https://djfriar.github.io/SMU-Homework-05-Day-Planner/).
 
 For full details on the assignment, please [view the assignment](ASSIGNMENT.md).
 
@@ -16,7 +16,7 @@ This site is a standard HTML, CSS, and JS site. To install you can clone the rep
 
 ![Screenshot of the full size layout](./assets/images/screenshot.png)
 
-## Creditsimages
+## Credits
 
 - Local Storage: [MDN Web Docs](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 - jQuery: [W3Schools.com](https://www.w3schools.com/jquery/default.asp)
