@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
     var now = moment().format("dddd, MMMM Do YYYY");
     console.log("time is " + now);
     var currentHour24h = moment().format('H');
@@ -15,6 +16,7 @@ $(document).ready(function() {
         eventArray = new Array(8);
         eventArray[4] = "Mmmmm ... food!"
     }
+    console.log(eventArray);
 
     var plannerDiv = $("#planner");
     plannerDiv.empty();
@@ -44,11 +46,11 @@ $(document).ready(function() {
         newRowDiv.append(timeCol);
 
         // draw the text area (column 2)
-        var rowIndex = hour - 8;
+        var rowIndex = hour - 9;
         var inputArea = $("<textarea>");
-        inputArea.attr('id',`input-${rowIndex}`);
-        inputArea.attr('hour-index',rowIndex);
-        inputArea.attr('class','description');
+        inputArea.attr("id",`input-${ rowIndex }`);
+        inputArea.attr("hour-index",rowIndex);
+        inputArea.attr("class","description");
         inputArea.val(eventArray[rowIndex]);
 
         let descriptionCol = $("<div>");
@@ -59,12 +61,13 @@ $(document).ready(function() {
 
         // draw the save button (column 3)
         var saveButtonDiv = $("<div>");
+        saveButtonDiv.attr("id",`saveID-${ rowIndex }`);
+        saveButtonDiv.attr("saveID",rowIndex);
         saveButtonDiv.addClass("col-md-1 saveBtn");
 
+        // add the icon
         var saveButton = $("<i>");
-        saveButton.attr("id",`saveID-${rowIndex}`);
-        saveButton.attr('saveID',rowIndex);
-        saveButton.attr('class',"far fa-save");
+        saveButton.attr("class","far fa-save");
 
         newRowDiv.append(saveButtonDiv);
         saveButtonDiv.append(saveButton);
@@ -72,6 +75,7 @@ $(document).ready(function() {
         // set row color based on time
         updateRowColor(newRowDiv, hour);
 
+        // Push the row out to the browser window
         plannerDiv.append(newRowDiv);
     }
 
@@ -86,11 +90,16 @@ $(document).ready(function() {
     };
 
     // handle the save button
-    $(document).on('click', function(event) {
+    $(".saveBtn").on('click', function(event) {
         event.preventDefault();  
-
+        
         var index = $(this).attr("saveID");
-        alert("index is: " + index);
+        var eventInfoID = "#input-" + index;
+        var eventInfo = $(eventInfoID).val();
+
+        // save to the data array
+        eventArray[index] = eventInfo;
+        localStorage.setItem("storedEvents", JSON.stringify(eventArray));
     });
 
 });
