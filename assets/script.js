@@ -1,11 +1,11 @@
 $(document).ready(function() {
     var now = moment().format("dddd, MMMM Do YYYY");
-    console.log(now);
-    var currentHour24h = 0;
+    console.log("time is " + now);
+    var currentHour24h = moment().format('H');
 
     // Set date in header area
     $("#currentDay").text(now);
-    console.log(moment().format('h'));
+    console.log(currentHour24h);
 
     // Data handling
     var storedEvents = JSON.parse(localStorage.getItem("storedEvents"));
@@ -22,12 +22,12 @@ $(document).ready(function() {
     // Build the day planner
     for (var hour = 9; hour <= 17; hour++) {
 
-        // Rows
+        // draw the main rows
         var newRowDiv = $("<div>");
         newRowDiv.addClass("row");
         newRowDiv.attr("hour",hour);
 
-        // Time section
+        // draw the time section (column 1)
         var timeCol = $("<div>");
         timeCol.addClass("col-md-2 hour");
 
@@ -43,7 +43,7 @@ $(document).ready(function() {
         timeCol.text(`${ displayHour }${ amPM }`);
         newRowDiv.append(timeCol);
 
-        // Text area
+        // draw the text area (column 2)
         var rowIndex = hour - 8;
         var inputArea = $("<textarea>");
         inputArea.attr('id',`input-${rowIndex}`);
@@ -57,13 +57,13 @@ $(document).ready(function() {
         newRowDiv.append(descriptionCol);
         descriptionCol.append(inputArea);
 
-        // Save Button
+        // draw the save button (column 3)
         var saveButtonDiv = $("<div>");
         saveButtonDiv.addClass("col-md-1 saveBtn");
 
         var saveButton = $("<i>");
-        saveButton.attr("id",`save-id-${rowIndex}`);
-        saveButton.attr('save-id',rowIndex);
+        saveButton.attr("id",`saveID-${rowIndex}`);
+        saveButton.attr('saveID',rowIndex);
         saveButton.attr('class',"far fa-save");
 
         newRowDiv.append(saveButtonDiv);
@@ -84,5 +84,13 @@ $(document).ready(function() {
             rowHour.addClass("present");
         }
     };
+
+    // handle the save button
+    $(document).on('click', function(event) {
+        event.preventDefault();  
+
+        var index = $(this).attr("saveID");
+        alert("index is: " + index);
+    });
 
 });
